@@ -1,0 +1,148 @@
+<?php
+/**
+ * User: Zhanybek Seitaliev
+ * Email: zhandev312@gmail.com
+ * Date: 1/26/18
+ * Time: 2:01 PM
+ */
+
+namespace App\Http\Controllers\Shopify;
+
+use App\Helpers\Messenger\ApiSend;
+use App\Http\Controllers\Controller;
+use App\Models\MessagePayload;
+use App\Models\Shop;
+use Illuminate\Http\Request;
+
+class WebhookHandleController extends Controller
+{
+    public function handle(Request $request)
+    {
+        $domain = $request->header('x-shopify-shop-domain');
+        $topic  = $request->header('x-shopify-topic');
+
+        $method = str_replace('/', '_', $topic);
+
+        $shop = Shop::where('myshopify_domain', $domain)->first();
+
+        error_log($method);
+
+        if(empty($shop)) {
+            error_log('Shop exist');
+            return response('Shop exist', 422);
+        }
+
+        if(empty($shop->messengers)) {
+            error_log('Messengers exist');
+            return response('Messengers exist', 422);
+        }
+
+        if(!method_exists($this, $method)) {
+            error_log('Method exist');
+            return response('Method exist', 422);
+        }
+
+
+
+        $separateMethod = explode('_', $method);
+
+        $webhookName = $separateMethod[0];
+
+        $webhooksStatus = $shop->webhooks->first();
+
+        if($webhooksStatus[mb_substr($webhookName, 0, -1)]) {
+
+            foreach ($shop->messengers as $messenger) {
+
+                $this->$method($request->all(), $messenger);
+
+            }
+
+        }else {
+
+
+            error_log('Event disabled');
+
+        }
+
+    }
+
+    public function carts_update($body, $messenger)
+    {
+
+        $apiSend = new ApiSend($messenger->id);
+
+        $messagePayload = MessagePayload::create([
+            'type' => 'carts_update',
+            'payload' => json_encode($body)
+        ]);
+
+        $apiSend->sendMessage([
+            'attachment' => [
+                'type' => 'template',
+                'payload' => [
+                    'template_type' => 'generic',
+                    'elements' => [
+                        [
+                            'title' => 'Cart Updated',
+                            'subtitle' => 'Someone from your customers has updated their shopping cart',
+                            'buttons' => [
+                                [
+                                    'type' => 'web_url',
+                                    'url' => route('webview-cart', ['payload_id' => $messagePayload->id]),
+                                    'title' => 'View Cart'
+                                ]
+                            ]
+                        ],
+                    ]
+                ]
+            ]
+        ]);
+    }
+
+    public function carts_create($body, $messenger)
+    {
+
+        $apiSend = new ApiSend($messenger->id);
+
+        $messagePayload = MessagePayload::create([
+            'type' => 'carts_create',
+            'payload' => json_encode($body)
+        ]);
+        error_log($messagePayload->id);
+
+        $apiSend->sendMessage([
+            'attachment' => [
+                'type' => 'template',
+                'payload' => [
+                    'template_type' => 'generic',
+                    'elements' => [
+                        [
+                            'title' => 'Cart Create',
+                            'subtitle' => 'Someone from your customers create shopping cart',
+                            'buttons' => [
+                                [
+                                    'type' => 'web_url',
+                                    'url' => route('webview-cart', ['payload_id' => $messagePayload->id]),
+                                    'title' => 'View Cart'
+                                ]
+                            ]
+                        ],
+                    ]
+                ]
+            ]
+        ]);
+    }
+
+    public function checkouts_create($body, $messenger)
+    {
+        error_log('checkouts/create');
+    }
+
+    public function checkouts_update($body, $messenger)
+    {
+        error_log(json_encode($body));
+    }
+
+
+}
