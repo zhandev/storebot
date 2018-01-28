@@ -40,4 +40,30 @@ class WebViewController extends Controller
             'line_items' => $data['line_items']
         ]);
     }
+
+    public function checkout(Request $request)
+    {
+        $payloadId = $request->get('payload_id');
+
+        if(empty($payloadId)) {
+
+            return view('webviews.exist');
+
+        }
+
+        $payloadData = MessagePayload::find($payloadId);
+
+        if(empty($payloadData)) {
+
+            return view('webviews.exist');
+
+        }
+
+        $type = $payloadData['type'];
+        $data = $payloadData['payload'];
+
+        return view('webviews.checkout', [
+            'line_items' => $data['line_items']
+        ]);
+    }
 }

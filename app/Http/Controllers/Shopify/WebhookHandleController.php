@@ -109,7 +109,6 @@ class WebhookHandleController extends Controller
             'type' => 'carts_create',
             'payload' => json_encode($body)
         ]);
-        error_log($messagePayload->id);
 
         $apiSend->sendMessage([
             'attachment' => [
@@ -136,13 +135,66 @@ class WebhookHandleController extends Controller
 
     public function checkouts_create($body, $messenger)
     {
-        error_log('checkouts/create');
+        $apiSend = new ApiSend($messenger->id);
+        $messagePayload = MessagePayload::create([
+            'type' => 'checkouts_create',
+            'payload' => json_encode($body)
+        ]);
+
+
+        $apiSend->sendMessage([
+            'attachment' => [
+                'type' => 'template',
+                'payload' => [
+                    'template_type' => 'generic',
+                    'elements' => [
+                        [
+                            'title' => 'Cart Create',
+                            'subtitle' => 'Someone from your customers create shopping cart',
+                            'buttons' => [
+                                [
+                                    'type' => 'web_url',
+                                    'url' => route('webview-cart', ['payload_id' => $messagePayload->id]),
+                                    'title' => 'View Cart'
+                                ]
+                            ]
+                        ],
+                    ]
+                ]
+            ]
+        ]);
     }
 
     public function checkouts_update($body, $messenger)
     {
-        error_log(json_encode($body));
-    }
+        $apiSend = new ApiSend($messenger->id);
+        $messagePayload = MessagePayload::create([
+            'type' => 'checkouts_update',
+            'payload' => json_encode($body)
+        ]);
 
+
+        $apiSend->sendMessage([
+            'attachment' => [
+                'type' => 'template',
+                'payload' => [
+                    'template_type' => 'generic',
+                    'elements' => [
+                        [
+                            'title' => 'Checkout Update',
+                            'subtitle' => 'Someone from your customers create shopping cart',
+                            'buttons' => [
+                                [
+                                    'type' => 'web_url',
+                                    'url' => route('webview-cart', ['payload_id' => $messagePayload->id]),
+                                    'title' => 'View Cart'
+                                ]
+                            ]
+                        ],
+                    ]
+                ]
+            ]
+        ]);
+    }
 
 }

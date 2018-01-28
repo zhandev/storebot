@@ -63,6 +63,8 @@ Route::namespace('Messenger')->group(function () {
 
         Route::get('cart', 'WebViewController@cart')->name('webview-cart');
 
+        Route::get('checkout', 'WebViewController@checkout')->name('webview-checkout');
+
     });
 
 });
