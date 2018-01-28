@@ -86,7 +86,7 @@
             <ul class="navbar-nav mr-auto">
             </ul>
             <ul class="navbar-nav">
-                <li class="nav-item">
+                <li class="nav-item {{ Route::currentRouteName() == 'dashboard' ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('dashboard') }}">Dashboard <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
