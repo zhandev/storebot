@@ -31,6 +31,11 @@ class AuthController extends Controller
 
     public function install(Request $request)
     {
+        $shop = $request->get('shop');
+        if(empty($shop)) {
+            abort(400, 'Empty shop value');
+        }
+
         return redirect(Shopify::getInstallUrl(
             $request->shop,
             env('SHOPIFY_API_KEY'),
