@@ -11,6 +11,7 @@
         <div class="col-sm-12 col-md-6">
             <div class="card">
                 <div class="card-body">
+                    <p>Total Price: {{ $data['total_price'] }}</p>
                     <p>Total {{ count($line_items) }} variants</p>
                     <hr />
                     <div class="products-list">
