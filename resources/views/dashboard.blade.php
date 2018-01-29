@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Dashboard')
 @section('content')
     <div class="container" id="app" data-webhooks="{{ json_encode($webhooks) }}">
         <div class="hero text-center">
