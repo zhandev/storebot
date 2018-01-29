@@ -36,9 +36,14 @@
             color: #fff;
             margin-top: 0.5rem;
             margin-bottom: 1rem;
+            text-align: center;
         }
         .header > h5 {
             font-weight: 700;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
         }
     </style>
 </head>
