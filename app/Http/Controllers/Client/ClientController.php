@@ -20,7 +20,7 @@ class ClientController extends Controller
         $shopObj = Shop::find($request->session()->get('shop_id'));
         $messengers = $shopObj->messengers;
         $webhooks = $shopObj->webhooks;
-ss
+
         return view('dashboard', [
             'messengers' => $messengers,
             'webhooks' => $webhooks->first()
