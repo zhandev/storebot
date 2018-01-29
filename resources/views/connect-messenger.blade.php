@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Connect messenger')
 @section('content')
     <script>
         window.fbAsyncInit = function() {
