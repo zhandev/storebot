@@ -69,6 +69,20 @@ Route::namespace('Messenger')->group(function () {
 
 });
 
+Route::namespace('Shopify')->group(function () {
+
+    Route::prefix('shopify')->group(function () {
+
+        Route::post('webhook', 'WebhookHandleController@handle');
+
+    });
+
+});
+
+/*
+ * Develop Side
+ */
+
 Route::namespace('Messenger')->group(function () {
 
     Route::prefix('admin')->group(function () {
@@ -79,12 +93,15 @@ Route::namespace('Messenger')->group(function () {
 
 });
 
-Route::namespace('Shopify')->group(function () {
+Route::post('bitbucket/webhooks', function(\Illuminate\Http\Request $request) {
 
-    Route::prefix('shopify')->group(function () {
+    $payload = json_decode($request->getContent(), true);
+    $eventKey = $request->headers->get('X-Event-Key');
 
-        Route::post('webhook', 'WebhookHandleController@handle');
+    if($eventKey === 'repo:push') {
 
-    });
+        $output = shell_exec('git pull /var/www/storebot/');
+
+    }
 
 });
