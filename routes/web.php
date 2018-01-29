@@ -65,7 +65,9 @@ Route::namespace('Messenger')->group(function () {
 
         Route::get('cart-update', 'WebViewController@cartUpdate')->name('webview-cart-update');
 
-        Route::get('checkout', 'WebViewController@checkout')->name('webview-checkout');
+        Route::get('checkout-create', 'WebViewController@checkoutCreate')->name('webview-checkout-create');
+
+        Route::get('checkout-update', 'WebViewController@checkoutUpdate')->name('webview-checkout-update');
 
     });
 

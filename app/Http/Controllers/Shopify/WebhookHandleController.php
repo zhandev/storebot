@@ -118,7 +118,7 @@ class WebhookHandleController extends Controller
                     'elements' => [
                         [
                             'title' => 'Cart Create',
-                            'subtitle' => 'Someone from your customers create Cart',
+                            'subtitle' => 'Someone from your customers created Cart',
                             'buttons' => [
                                 [
                                     'type' => 'web_url',
@@ -150,11 +150,11 @@ class WebhookHandleController extends Controller
                     'elements' => [
                         [
                             'title' => 'Checkout Create',
-                            'subtitle' => 'Someone from your customers create Checkout',
+                            'subtitle' => 'Someone from your customers created Checkout',
                             'buttons' => [
                                 [
                                     'type' => 'web_url',
-                                    'url' => route('webview-checkout', ['payload_id' => $messagePayload->id]),
+                                    'url' => route('webview-checkout-create', ['payload_id' => $messagePayload->id]),
                                     'title' => 'View Checkout'
                                 ]
                             ]
@@ -181,12 +181,12 @@ class WebhookHandleController extends Controller
                     'template_type' => 'generic',
                     'elements' => [
                         [
-                            'title' => 'Checkout Update',
-                            'subtitle' => 'Someone from your customers update Checkout',
+                            'title' => 'Checkout Updated',
+                            'subtitle' => 'Someone from your customers updated Checkout',
                             'buttons' => [
                                 [
                                     'type' => 'web_url',
-                                    'url' => route('webview-checkout', ['payload_id' => $messagePayload->id]),
+                                    'url' => route('webview-checkout-update', ['payload_id' => $messagePayload->id]),
                                     'title' => 'View Checkout'
                                 ]
                             ]

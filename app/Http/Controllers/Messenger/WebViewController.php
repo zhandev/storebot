@@ -68,7 +68,7 @@ class WebViewController extends Controller
         ]);
     }
 
-    public function checkout(Request $request)
+    public function checkoutCreate(Request $request)
     {
         $payloadId = $request->get('payload_id');
 
@@ -89,8 +89,36 @@ class WebViewController extends Controller
         $type = $payloadData['type'];
         $data = $payloadData['payload'];
 
-        return view('webviews.checkout', [
-            'line_items' => $data['line_items']
+        return view('webviews.checkout-create', [
+            'line_items' => $data['line_items'],
+            'data' => $data
+        ]);
+    }
+
+    public function checkoutUpdate(Request $request)
+    {
+        $payloadId = $request->get('payload_id');
+
+        if(empty($payloadId)) {
+
+            return view('webviews.exist');
+
+        }
+
+        $payloadData = MessagePayload::find($payloadId);
+
+        if(empty($payloadData)) {
+
+            return view('webviews.exist');
+
+        }
+
+        $type = $payloadData['type'];
+        $data = $payloadData['payload'];
+
+        return view('webviews.checkout-update', [
+            'line_items' => $data['line_items'],
+            'data' => $data
         ]);
     }
 }
