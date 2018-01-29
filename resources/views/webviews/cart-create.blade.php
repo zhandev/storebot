@@ -3,16 +3,30 @@
 @section('title', 'Cart Create')
 
 @section('content')
-    <hr>
-    <ul class="list-group">
-        @forelse($line_items as $item)
-            <li class="list-group-item">
-                <h5>{{ $item['title'] }}</h5>
-                <p class="text-muted">Quantity: {{ $item['quantity'] }}</p>
-                <p class="text-muted">Total Price: {{ $item['line_price'] }}</p>
-            </li>
-        @empty
-            <h4>Cart was cleaned.</h4>
-        @endforelse
-    </ul>
+
+    <div class="header">
+        <h5>Customer create card</h5>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-sm-12 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <p>Total {{ count($line_items) }} variants</p>
+                    <hr />
+                    <div class="products-list">
+                    @forelse($line_items as $item)
+                        <div class="product-section">
+                            <h6 class="text-muted">{{ $item['title'] }}</h6>
+                            <p class="text-muted">Quantity: {{ $item['quantity'] }}</p>
+                            <p class="text-muted">Total Price: {{ $item['line_price'] }}</p>
+                        </div>
+                        <hr />
+                    @empty
+                        <h4>Cart was cleaned.</h4>
+                    @endforelse
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

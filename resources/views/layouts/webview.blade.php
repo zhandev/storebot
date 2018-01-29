@@ -7,7 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,700" rel="stylesheet">
     <title>@yield('title')</title>
 
     <script>
@@ -28,7 +28,18 @@
         .list-group {
             font-family: 'Work Sans', sans-serif;
         }
-
+        body {
+            background-color: #5176f5;
+            font-family: 'Ubuntu', sans-serif;
+        }
+        .header {
+            color: #fff;
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .header > h5 {
+            font-weight: 700;
+        }
     </style>
 </head>
 <body>
