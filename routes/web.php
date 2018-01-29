@@ -100,7 +100,9 @@ Route::post('bitbucket/webhooks', function(\Illuminate\Http\Request $request) {
 
     if($eventKey === 'repo:push') {
 
-        $output = shell_exec('git pull /var/www/storebot/');
+        $output = shell_exec('git pull /var/www/storebot');
+
+        return response($output, 200);
 
     }
 
