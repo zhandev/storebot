@@ -77,7 +77,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-blue site-header">
     <div class="container">
-        <a class="navbar-brand" href="#">STOREBOT</a>
+        <a class="navbar-brand" href="{{ route('dashboard') }}">STOREBOT</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
