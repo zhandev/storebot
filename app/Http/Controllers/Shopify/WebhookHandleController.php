@@ -85,11 +85,11 @@ class WebhookHandleController extends Controller
                     'elements' => [
                         [
                             'title' => 'Cart Updated',
-                            'subtitle' => 'Someone from your customers has updated their shopping cart',
+                            'subtitle' => 'Someone from your customers has updated their Cart',
                             'buttons' => [
                                 [
                                     'type' => 'web_url',
-                                    'url' => route('webview-cart', ['payload_id' => $messagePayload->id]),
+                                    'url' => route('webview-cart-update', ['payload_id' => $messagePayload->id]),
                                     'title' => 'View Cart'
                                 ]
                             ]
@@ -118,11 +118,11 @@ class WebhookHandleController extends Controller
                     'elements' => [
                         [
                             'title' => 'Cart Create',
-                            'subtitle' => 'Someone from your customers create shopping cart',
+                            'subtitle' => 'Someone from your customers create Cart',
                             'buttons' => [
                                 [
                                     'type' => 'web_url',
-                                    'url' => route('webview-cart', ['payload_id' => $messagePayload->id]),
+                                    'url' => route('webview-cart-create', ['payload_id' => $messagePayload->id]),
                                     'title' => 'View Cart'
                                 ]
                             ]
@@ -149,13 +149,13 @@ class WebhookHandleController extends Controller
                     'template_type' => 'generic',
                     'elements' => [
                         [
-                            'title' => 'Cart Create',
-                            'subtitle' => 'Someone from your customers create shopping cart',
+                            'title' => 'Checkout Create',
+                            'subtitle' => 'Someone from your customers create Checkout',
                             'buttons' => [
                                 [
                                     'type' => 'web_url',
-                                    'url' => route('webview-cart', ['payload_id' => $messagePayload->id]),
-                                    'title' => 'View Cart'
+                                    'url' => route('webview-checkout', ['payload_id' => $messagePayload->id]),
+                                    'title' => 'View Checkout'
                                 ]
                             ]
                         ],
@@ -182,12 +182,12 @@ class WebhookHandleController extends Controller
                     'elements' => [
                         [
                             'title' => 'Checkout Update',
-                            'subtitle' => 'Someone from your customers create shopping cart',
+                            'subtitle' => 'Someone from your customers update Checkout',
                             'buttons' => [
                                 [
                                     'type' => 'web_url',
-                                    'url' => route('webview-cart', ['payload_id' => $messagePayload->id]),
-                                    'title' => 'View Cart'
+                                    'url' => route('webview-checkout', ['payload_id' => $messagePayload->id]),
+                                    'title' => 'View Checkout'
                                 ]
                             ]
                         ],

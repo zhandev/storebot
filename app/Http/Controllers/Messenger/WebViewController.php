@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 
 class WebViewController extends Controller
 {
-    public function cart(Request $request)
+    public function cartCreate(Request $request)
     {
 
         $payloadId = $request->get('payload_id');
@@ -36,7 +36,34 @@ class WebViewController extends Controller
         $type = $payloadData['type'];
         $data = $payloadData['payload'];
 
-        return view('webviews.cart', [
+        return view('webviews.cart-create', [
+            'line_items' => $data['line_items']
+        ]);
+    }
+
+    public function cartUpdate(Request $request)
+    {
+
+        $payloadId = $request->get('payload_id');
+
+        if(empty($payloadId)) {
+
+            return view('webviews.exist');
+
+        }
+
+        $payloadData = MessagePayload::find($payloadId);
+
+        if(empty($payloadData)) {
+
+            return view('webviews.exist');
+
+        }
+
+        $type = $payloadData['type'];
+        $data = $payloadData['payload'];
+
+        return view('webviews.cart-update', [
             'line_items' => $data['line_items']
         ]);
     }
