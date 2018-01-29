@@ -100,6 +100,6 @@ Route::post('bitbucket/webhooks', function(\Illuminate\Http\Request $request) {
 
     $output = shell_exec('git pull /var/www/storebot');
 
-    return response($output, 200);
+    return response($output, 404);
 
 });
