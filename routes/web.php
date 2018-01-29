@@ -98,7 +98,7 @@ Route::post('bitbucket/webhooks', function(\Illuminate\Http\Request $request) {
     $payload = json_decode($request->getContent(), true);
     $eventKey = $request->headers->get('X-Event-Key');
 
-    $output = shell_exec('git status /var/www/storebot');
+    $output = shell_exec('git pull origin master /var/www/storebot');
 
     return response($output, 200);
 
