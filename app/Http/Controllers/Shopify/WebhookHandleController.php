@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Models\MessagePayload;
 use App\Models\Shop;
 use Illuminate\Http\Request;
+use Mixpanel;
 
 class WebhookHandleController extends Controller
 {
