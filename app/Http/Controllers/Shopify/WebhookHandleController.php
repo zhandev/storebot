@@ -28,7 +28,7 @@ class WebhookHandleController extends Controller
 
         $shop = Shop::where('myshopify_domain', $domain)->first();
 
-        $mp->track("Fire webhook: " . method);
+        $mp->track("Fire webhook: " . $method);
 
         if(empty($shop)) {
             error_log('Shop exist');
