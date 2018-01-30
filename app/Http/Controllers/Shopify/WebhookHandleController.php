@@ -29,40 +29,40 @@ class WebhookHandleController extends Controller
         $shop = Shop::where('myshopify_domain', $domain)->first();
 
         $mp->track("Fire webhook: " . $method);
-
-        if(empty($shop)) {
-            error_log('Shop exist');
-            return response('Shop exist', 422);
-        }
-
-        if(empty($shop->messengers)) {
-            return response('Messengers exist', 422);
-        }
-
-        if(!method_exists($this, $method)) {
-            return response('Method exist', 422);
-        }
-
-        $separateMethod = explode('_', $method);
-
-        $webhookName = $separateMethod[0];
-
-        $webhooksStatus = $shop->webhooks->first();
-
-        if($webhooksStatus[mb_substr($webhookName, 0, -1)]) {
-
-            foreach ($shop->messengers as $messenger) {
-
-                $this->$method($request->all(), $messenger);
-
-            }
-
-        }else {
-
-
-            error_log('Event disabled');
-
-        }
+//
+//        if(empty($shop)) {
+//            error_log('Shop exist');
+//            return response('Shop exist', 422);
+//        }
+//
+//        if(empty($shop->messengers)) {
+//            return response('Messengers exist', 422);
+//        }
+//
+//        if(!method_exists($this, $method)) {
+//            return response('Method exist', 422);
+//        }
+//
+//        $separateMethod = explode('_', $method);
+//
+//        $webhookName = $separateMethod[0];
+//
+//        $webhooksStatus = $shop->webhooks->first();
+//
+//        if($webhooksStatus[mb_substr($webhookName, 0, -1)]) {
+//
+//            foreach ($shop->messengers as $messenger) {
+//
+//                $this->$method($request->all(), $messenger);
+//
+//            }
+//
+//        }else {
+//
+//
+//            error_log('Event disabled');
+//
+//        }
 
     }
 
