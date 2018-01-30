@@ -18,6 +18,8 @@ class WebhookHandleController extends Controller
 {
     public function handle(Request $request)
     {
+        $mp = Mixpanel::getInstance(env('MIXPANEL_PROJECT_TOKEN'));
+
         $domain = $request->header('x-shopify-shop-domain');
         $topic  = $request->header('x-shopify-topic');
 
@@ -25,7 +27,7 @@ class WebhookHandleController extends Controller
 
         $shop = Shop::where('myshopify_domain', $domain)->first();
 
-        error_log($method);
+        $mp->track("Fire webhook: " . method);
 
         if(empty($shop)) {
             error_log('Shop exist');
@@ -33,16 +35,12 @@ class WebhookHandleController extends Controller
         }
 
         if(empty($shop->messengers)) {
-            error_log('Messengers exist');
             return response('Messengers exist', 422);
         }
 
         if(!method_exists($this, $method)) {
-            error_log('Method exist');
             return response('Method exist', 422);
         }
-
-
 
         $separateMethod = explode('_', $method);
 
