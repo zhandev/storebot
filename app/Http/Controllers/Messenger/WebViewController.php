@@ -16,24 +16,11 @@ class WebViewController extends Controller
 {
     public function cartCreate(Request $request)
     {
+        $payloadData = MessagePayload::find($$request->get('payload_id'));
 
-        $payloadId = $request->get('payload_id');
-
-        if(empty($payloadId)) {
-
+        if(empty($$request->get('payload_id')) || empty($payloadData)) {
             return view('webviews.exist');
-
         }
-
-        $payloadData = MessagePayload::find($payloadId);
-
-        if(empty($payloadData)) {
-
-            return view('webviews.exist');
-
-        }
-
-        $type = $payloadData['type'];
         $data = $payloadData['payload'];
 
         return view('webviews.cart-create', [
@@ -44,23 +31,11 @@ class WebViewController extends Controller
     public function cartUpdate(Request $request)
     {
 
-        $payloadId = $request->get('payload_id');
+        $payloadData = MessagePayload::find($$request->get('payload_id'));
 
-        if(empty($payloadId)) {
-
+        if(empty($$request->get('payload_id')) || empty($payloadData)) {
             return view('webviews.exist');
-
         }
-
-        $payloadData = MessagePayload::find($payloadId);
-
-        if(empty($payloadData)) {
-
-            return view('webviews.exist');
-
-        }
-
-        $type = $payloadData['type'];
         $data = $payloadData['payload'];
 
         return view('webviews.cart-update', [
@@ -70,23 +45,11 @@ class WebViewController extends Controller
 
     public function checkoutCreate(Request $request)
     {
-        $payloadId = $request->get('payload_id');
+        $payloadData = MessagePayload::find($$request->get('payload_id'));
 
-        if(empty($payloadId)) {
-
+        if(empty($$request->get('payload_id')) || empty($payloadData)) {
             return view('webviews.exist');
-
         }
-
-        $payloadData = MessagePayload::find($payloadId);
-
-        if(empty($payloadData)) {
-
-            return view('webviews.exist');
-
-        }
-
-        $type = $payloadData['type'];
         $data = $payloadData['payload'];
 
         return view('webviews.checkout-create', [
@@ -97,23 +60,11 @@ class WebViewController extends Controller
 
     public function checkoutUpdate(Request $request)
     {
-        $payloadId = $request->get('payload_id');
+        $payloadData = MessagePayload::find($$request->get('payload_id'));
 
-        if(empty($payloadId)) {
-
+        if(empty($$request->get('payload_id')) || empty($payloadData)) {
             return view('webviews.exist');
-
         }
-
-        $payloadData = MessagePayload::find($payloadId);
-
-        if(empty($payloadData)) {
-
-            return view('webviews.exist');
-
-        }
-
-        $type = $payloadData['type'];
         $data = $payloadData['payload'];
 
         return view('webviews.checkout-update', [
